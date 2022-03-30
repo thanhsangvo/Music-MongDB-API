@@ -1,0 +1,100 @@
+<!-- index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      h1 {
+        text-align: center;
+        color: rgb(255, 0, 128);
+      }
+      body {
+        background-color: rgb(207, 189, 189);
+      }      
+
+      div {
+        padding: 20px;
+      }
+      #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+      
+      #customers tr:nth-child(even){background-color: #f2f2f2;}
+      
+      #customers tr:hover {background-color: #ddd;}
+      
+      #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #04AA6D;
+        color: white;
+      }
+      </style>
+    <title>Database SoundSleep App</title>
+  </head>
+
+  <body>
+
+    <!-- <script src="/main.js"></script>
+    <div>
+      <h2>Darth Vadar invades!</h2>
+      <p>
+        Replace first Yoda's quote with a quote written by Darth Vadar
+      </p>
+      <button id="update-button">Replace Yoda's quote</button>
+    </div> -->
+
+    <h1>Manager Music MongoDB</h1>
+
+    <form action="/quotes" method="POST">
+      <input type="text" placeholder="Name" name="name" /> <br>
+      <input type="text" placeholder="URL Music" name="musicURL" /> <br>
+      <input type="text" placeholder="URL Image" name="imgURL" /> <br>
+      <button type="submit">Submit</button>
+    </form>
+
+
+    <!-- <h2> Quotes </h2>
+    <ul class="quotes">
+    <!-- Loop through quotes -->
+    <!-- <% for(var i = 0; i < quotes.length; i++) {%>
+        <li class="quote">
+        <!-- Output name from the iterated quote object -->
+        <!-- <span><%= quotes[i].name %></span>: -->
+        <!-- Output quote from the iterated quote object -->
+        <!-- <span><%= quotes[i].quote %></span> -->
+        </li>
+    <!-- <% } %> -->
+    <!-- </ul> -->
+
+    <div></div>
+    <h2> Music </h2>
+    <table id="customers", style="width:100%">
+      <tr>
+        <th style="width:10%">Name</th>
+        <th>URL Music</th>
+        <th>Image</th>
+      </tr>
+      <% for(var i = 0; i < quotes.length; i++) {%>
+        <tr>
+          <td><%= quotes[i].name %></td>
+          <td><%= quotes[i].musicURL %></td>
+          <td>
+            <img src= <%= quotes[i].imgURL %>
+            style="width:143px;height:142px;">
+          </td>
+        </tr>
+      <% } %>
+
+
+    </table>
+  </body>
+</html>
