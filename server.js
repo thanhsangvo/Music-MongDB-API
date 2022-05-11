@@ -7,22 +7,36 @@ const Music = require('./models/music_model')
 
 app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({ extended: true }))
+
 const MongoClient = require('mongodb').MongoClient
 
-var url = 'mongodb://localhost:27017/SoundSleep';
+// var url = 'mongodb://localhost:27017/SoundSleep'; // local
+// mongoose.connect(url, {useNewUrlParser: true}).then((client) => {
+//     console.log('Connected to Database')
+// }).catch((err) => {
+//     console.log(err)
+// });
 
-mongoose.connect(url, {useNewUrlParser: true}).then((client) => {
-    console.log('Connected to Database')
-}).catch((err) => {
-    console.log(err)
-});
+const username = "devsang";
+const password = "sangne";
+const cluster = "cluster0.u9hir";
+const dbname = "SoundSleep";
+const URI = `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`;
+console.log(URI);
+mongoose.connect(URI,
+    err => {
+        if(err) throw err;
+        console.log('connected to MongoDB')
+    }
+);
 
 app.get('/', (req, res) => {
-    Music.find({}, (error, music) => {
-        // console.log(music)
-        res.render('index.ejs', { quotes: music})
+    // res.json('afedea');
+        Music.find({}, (error, music) => {
+            console.log(music)
+            res.render('index.ejs', { quotes: music})
+        })
     })
-})
 
 app.post('/quotes', (req, res) => {
 
@@ -51,36 +65,6 @@ app.get('/fetchAll', (req, res) => {
         res.json(music)
     })
 })
-
-
-// MongoClient.connect(url, { useUnifiedTopology: true }).then(client => {
-//     console.log('Connected to Database')
-//     const db = client.db('SoundSleep')
-//     const quotesCollection = db.collection('Music')
-
-//     // app.get('/', (req, res) => {
-//     //     res.sendFile(__dirname + '/views/index.html')
-//     // })
-
-//     app.get('/', (req, res) => {
-//         db.collection('Music').find().toArray()
-//           .then(results => {
-//             // console.log(results)
-//             res.render('index.ejs', { quotes: results})
-//           })
-//           .catch(error => console.error(error))
-          
-//     })
-
-//     app.post('/quotes', (req, res) => {
-//         quotesCollection.insertOne(req.body).then(result => {
-//             res.redirect('/')
-//         })
-//         .catch(error => console.error(error))
-//     })
-// })
-// .catch(error => console.error(error))
-
 
 
 app.listen(3000, function() {

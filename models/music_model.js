@@ -6,6 +6,7 @@ const musicSchema = new mongoose.Schema({
     imgURL: String
 })
 
-const Music = mongoose.model('Sang', musicSchema); // Sang is Colotection
+const Music = mongoose.model('music', musicSchema); // Sang is Colotection
 
 module.exports = Music
+
