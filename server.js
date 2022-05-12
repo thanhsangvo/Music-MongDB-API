@@ -22,7 +22,7 @@ const password = "sangne";
 const cluster = "cluster0.u9hir";
 const dbname = "SoundSleep";
 
-const URI = `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`;
+// const URI = `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`;
 const uri = process.env.MONGODB_URI;
 
 // console.log(URI);
@@ -34,7 +34,7 @@ mongoose.connect(uri,
 );
 
 app.get('/', (req, res) => {
-    
+        // res.json('ahihi');
         Music.find({}, (error, music) => {
             // console.log(music)
             res.render('index.ejs', { quotes: music})
