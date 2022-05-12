@@ -73,4 +73,4 @@ app.get('/fetchAll', (req, res) => {
 //     console.log('listening on 3000')
 // })
 
-app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+app.listen(process.env.PORT || 5000, () => console.log(`Listening on ${ process.env.PORT }`));
