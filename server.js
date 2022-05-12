@@ -69,6 +69,8 @@ app.get('/fetchAll', (req, res) => {
 })
 
 
-app.listen(3000, function() {
-    console.log('listening on 3000')
-})
+// app.listen(3000, function() {
+//     console.log('listening on 3000')
+// })
+
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
