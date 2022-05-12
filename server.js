@@ -21,9 +21,12 @@ const username = "devsang";
 const password = "sangne";
 const cluster = "cluster0.u9hir";
 const dbname = "SoundSleep";
+
 const URI = `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`;
-console.log(URI);
-mongoose.connect(URI,
+const uri = process.env.MONGODB_URI;
+
+// console.log(URI);
+mongoose.connect(uri,
     err => {
         if(err) throw err;
         console.log('connected to MongoDB')
@@ -31,12 +34,13 @@ mongoose.connect(URI,
 );
 
 app.get('/', (req, res) => {
-    // res.json('afedea');
+    
         Music.find({}, (error, music) => {
-            console.log(music)
+            // console.log(music)
             res.render('index.ejs', { quotes: music})
         })
-    })
+    }
+)
 
 app.post('/quotes', (req, res) => {
 
@@ -53,10 +57,8 @@ app.post('/quotes', (req, res) => {
             console.log(newMuic)
             // res.status(200).json(newMuic)
             res.redirect('/')
-
         }
     })
-
 })
 
 app.get('/fetchAll', (req, res) => {
