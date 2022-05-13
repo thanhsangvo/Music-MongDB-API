@@ -1,0 +1,46 @@
+h1 {
+    text-align: center;
+    color: rgb(255, 0, 128);
+    }
+    
+  body {
+    background-color: white;
+  }      
+
+  div {
+    padding: 20px;
+  }
+  #customers {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #customers td, #customers th {
+    border: 3px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  #customers tr:nth-child(even){background-color: pink;}
+  
+  #customers tr:hover {background-color: rgb(255, 139, 159);}
+  
+  #customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: palevioletred;
+    color: white;
+  }
+  
+  input[type="inputID"]
+  { padding: 5px 5px;
+    line-height: 18px; 
+    width: 40px;
+  }
+
+  input[type="text"]
+  { padding: 5px 5px;
+    line-height: 18px; 
+    width: auto;
+  }

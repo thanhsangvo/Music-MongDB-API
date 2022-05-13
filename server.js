@@ -3,10 +3,13 @@ const bodyParser = require('body-parser');
 const { default: mongoose } = require('mongoose');
 const app = express();
 
-const Music = require('./models/music_model')
+const Music = require('./models/music_model');
+const { Int32 } = require('mongodb');
 
 app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json())
 
 const MongoClient = require('mongodb').MongoClient
 
@@ -22,11 +25,11 @@ const password = "sangne";
 const cluster = "cluster0.u9hir";
 const dbname = "SoundSleep";
 
-// const URI = `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`;
+const URI = `mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`;
 const uri = process.env.MONGODB_URI;
 
 // console.log(URI);
-mongoose.connect(uri,
+mongoose.connect(URI,
     err => {
         if(err) throw err;
         console.log('connected to MongoDB')
@@ -34,17 +37,17 @@ mongoose.connect(uri,
 );
 
 app.get('/', (req, res) => {
-        // res.json('ahihi');
-        Music.find({}, (error, music) => {
+
+    Music.find({}, (error, music) => {
             // console.log(music)
             res.render('index.ejs', { quotes: music})
-        })
+        }).sort({id: 1})
     }
 )
 
-app.post('/quotes', (req, res) => {
-
+app.post('/addData', (req, res) => {
     const music = new Music({
+        id : req.body.id,
         name: req.body.name,
         musicURL: req.body.musicURL,
         imgURL: req.body.imgURL,
@@ -54,7 +57,7 @@ app.post('/quotes', (req, res) => {
         if (error) {
             console.log(error)
         } else {
-            console.log(newMuic)
+            // console.log(newMuic)
             // res.status(200).json(newMuic)
             res.redirect('/')
         }
@@ -63,12 +66,35 @@ app.post('/quotes', (req, res) => {
 
 app.get('/fetchAll', (req, res) => {
     Music.find({}, (error, music) => {
-        console.log(music)
+        // console.log(music)
         res.json(music)
     })
 })
 
+app.get('/id/:id', (req, res) => {
+    const query = { id: parseInt(req.params.id) };
+
+    Music.findOne(query, (error, music) => {
+        res.json(music);
+    })
+})
+
+app.delete('/delete', (req, res) => {
+    const query = { name: req.body.name };
+    
+    console.log(query);
+
+    // Music.deleteOne(query, (error, music) => {
+    //     if (error) {
+    //         return res.redirect('/')
+    //     }
+    //     return res.redirect('/')
+    // })
+
+    Music.deleteOne(query).then(result => {
+        res.json('Deleted Success')
+    }).catch(error => console.error(error))
+})
 
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

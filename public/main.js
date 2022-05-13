@@ -1,18 +1,25 @@
-app.use(express.static('public'))
-app.use(bodyParser.json())
 
-const update = document.querySelector('#update-button')
+const deleteButton = document.getElementById('delete-button')
 
-update.addEventListener('click', _ => {
-    fetch('/quotes', {
-      method: 'put',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: 'Darth Vadar',
-        quote: 'I find your lack of faith disturbing.'
-      })
+deleteButton.addEventListener('click', (value) => {
+
+    fetch("/delete", {
+        method: "delete",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            name: `${ deleteButton.value }`
+        })
     })
-    app.put('/quotes', (req, res) => {
-        console.log(req.body)
+    .then((res) => {
+        console.log(`ahihi' ${res}`);
+        if (res.ok) 
+        return res.json();
     })
-})
+    .then((response) => {
+        console.log(response);
+        window.location.reload(true);
+        deleteButton.removeEventListener('delete-button')
+    });
+
+});
+
