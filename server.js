@@ -84,13 +84,6 @@ app.delete('/delete', (req, res) => {
     
     console.log(query);
 
-    // Music.deleteOne(query, (error, music) => {
-    //     if (error) {
-    //         return res.redirect('/')
-    //     }
-    //     return res.redirect('/')
-    // })
-
     Music.deleteOne(query).then(result => {
         res.json('Deleted Success')
     }).catch(error => console.error(error))
