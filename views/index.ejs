@@ -12,10 +12,11 @@
   </head>
 
   <body>
-
+  
     <h1>Manager Music MongoDB</h1>
 
     <div></div>
+
     <table id="customers", style="width:100%">
       <tr>
         <th style="width:5%">ID</th>
@@ -38,13 +39,13 @@
           <td><%= quotes[i].id %></td>
           <td><%= quotes[i].name %></td>
           <td><%= quotes[i].musicURL %></td>
-          <td>
-            <img src= <%= quotes[i].imgURL %>
-            style="width:140px;height:140px;">
-          </td>
+          <td><img src= <%= quotes[i].imgURL %> ></td>
           <td>
             <button id="delete-button" class="delete" value= <%= quotes[i].name %> >
                Delete <%= quotes[i].name %> </button>
+      
+             <button id="tabnew" class="newTab" value= <%= quotes[i].id %> >
+              Edit <%= quotes[i].name %> </button>
           </td>
         </tr>
       <% } %>

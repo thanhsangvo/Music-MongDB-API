@@ -1,0 +1,50 @@
+<!-- index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <title>Database SoundSleep App</title>
+  </head>
+
+  <body>
+    <h1>Edit Database</h1>
+
+    <table id="customers" , style="width: 100%">
+      <tr>
+        <th style="width: 5%">ID</th>
+        <th style="width: 10%">Name</th>
+        <th style="width: 20%">URL Music</th>
+        <th>URL Image</th>
+        <th style="width: 5%">Edit</th>
+      </tr>
+
+      <tr>
+        <form id="formUpdate" action="#">
+          <td>
+            <input id="inputId" value=<%= quotes.id %> />
+          </td>
+          <td>
+            <input id="inputName" value=<%= quotes.name %> />
+          </td>
+          <td>
+            <input id="inputMusicURL" value=<%= quotes.musicURL %> />
+          </td>
+          <td>
+            <input id="inputImgURL" value=<%= quotes.imgURL %> />
+          </td>
+          <td>
+            <button class="update-button" type="submit">Update</button>
+          </td>
+        </form>
+      </tr>
+    </table>
+    <script src="/main.js"></script>
+  </body>
+</html>
